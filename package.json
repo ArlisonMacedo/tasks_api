@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --no-notify src/server.ts",
     "knex:migrate": "knex --knexfile src/knexfile.ts migrate:latest",
-    "start": "node src/server.js",
-    "knex:migrate:produ": "knex --knexfile dist/src/knexfile.js migrate:latest"
+    "start": "node ./dist/server.js",
+    "knex:migrate:produ": "knex --knexfile ./dist/knexfile.js migrate:latest"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
