@@ -5,9 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = __importDefault(require("path"));
 module.exports = {
-    client: 'sqlite',
+    client: 'pg',
     connection: {
-        filename: path_1.default.resolve(__dirname, 'database', 'database.sqlite')
+        host: 'ruby.db.elephantsql.com',
+        database: 'vmecbbnk',
+        port: Number(5432),
+        user: 'vmecbbnk',
+        password: 'zcx3SJXkDCdxu4HCVZqeXljDsU5CIjDH'
     },
     migrations: {
         directory: path_1.default.resolve(__dirname, 'database', 'migrations')

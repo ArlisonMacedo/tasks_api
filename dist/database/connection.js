@@ -4,11 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var knex_1 = __importDefault(require("knex"));
-var path_1 = __importDefault(require("path"));
 var connection = knex_1.default({
-    client: 'sqlite',
+    client: 'pg',
     connection: {
-        filename: path_1.default.resolve(__dirname, 'database.sqlite')
+        host: 'ruby.db.elephantsql.com',
+        database: 'vmecbbnk',
+        port: Number(5432),
+        user: 'vmecbbnk',
+        password: 'zcx3SJXkDCdxu4HCVZqeXljDsU5CIjDH'
     },
     useNullAsDefault: true
 });
