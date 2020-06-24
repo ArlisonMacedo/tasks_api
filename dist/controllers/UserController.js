@@ -39,26 +39,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.store = void 0;
+exports.login = exports.store = void 0;
 var connection_1 = __importDefault(require("../database/connection"));
 var bcrypt_1 = __importDefault(require("bcrypt"));
 exports.store = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, email, password, passwordHash, user;
+    var _a, name, email, password, alreadyUser, passwordHash, user;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _a = request.body, name = _a.name, email = _a.email, password = _a.password;
-                return [4, bcrypt_1.default.hash(password, 8)];
+                return [4, connection_1.default('users').where('email', email).select('*').first()];
             case 1:
+                alreadyUser = _b.sent();
+                if (alreadyUser) {
+                    return [2, response.status(400).send('Email Already')];
+                }
+                return [4, bcrypt_1.default.hash(password, 8)];
+            case 2:
                 passwordHash = _b.sent();
                 return [4, connection_1.default('users').insert({
                         name: name,
                         email: email,
                         password: passwordHash
                     })];
-            case 2:
+            case 3:
                 user = _b.sent();
                 return [2, response.json(user)];
+        }
+    });
+}); };
+exports.login = function (request, response) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, email, password, user;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = request.body, email = _a.email, password = _a.password;
+                return [4, connection_1.default('users')
+                        .where('email', email)
+                        .select('*')];
+            case 1:
+                user = _b.sent();
+                if (!(user.length === 1)) return [3, 3];
+                return [4, bcrypt_1.default.compare(password, user[0].password)];
+            case 2:
+                if (_b.sent()) {
+                    return [2, response.json(user)];
+                }
+                _b.label = 3;
+            case 3: return [2, response.status(401).send()];
         }
     });
 }); };

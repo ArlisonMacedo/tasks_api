@@ -1,5 +1,5 @@
 import express from 'express'
-import { store } from './controllers/UserController'
+import { store, login } from './controllers/UserController'
 import {
   taskStore,
   taskDelete,
@@ -13,6 +13,7 @@ const routes = express.Router()
 // const userController = new UserController()
 
 routes.post('/v1/api/users', store)
+routes.post('/v1/api/users/session', login)
 
 // Tarefas
 

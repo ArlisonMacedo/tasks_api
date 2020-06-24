@@ -8,6 +8,7 @@ var UserController_1 = require("./controllers/UserController");
 var TaskController_1 = require("./controllers/TaskController");
 var routes = express_1.default.Router();
 routes.post('/v1/api/users', UserController_1.store);
+routes.post('/v1/api/users/session', UserController_1.login);
 routes.get('/v1/api/tasks', TaskController_1.taskIndex);
 routes.post('/v1/api/tasks', TaskController_1.taskStore);
 routes.get('/v1/api/tasks/completed', TaskController_1.taksIndexCompleted);
