@@ -35,7 +35,7 @@ export const login = async (request: Request, response: Response) => {
 
   if (user.length === 1) {
     if (await bcrypt.compare(password, user[0].password)) {
-      return response.json({ user })
+      return response.json(user[0].id)
     }
   }
 

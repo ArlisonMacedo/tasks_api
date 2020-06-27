@@ -59,6 +59,7 @@ exports.taskIndex = function (request, response) { return __awaiter(void 0, void
                 return [4, connection_1.default('tasks')
                         .join('users', 'users.id', 'tasks.user_id')
                         .where('users.id', String(user.id))
+                        .where('completed', null)
                         .select('tasks.*', 'users.name', 'users.email')];
             case 2:
                 tasks = _a.sent();

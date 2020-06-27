@@ -16,6 +16,7 @@ export const taskIndex = async (request: Request, response: Response) => {
   const tasks = await knex('tasks')
     .join('users', 'users.id', 'tasks.user_id')
     .where('users.id', String(user.id))
+    .where('completed', null)
 
     .select('tasks.*', 'users.name', 'users.email')
 
@@ -51,6 +52,8 @@ export const taskStore = async (request: Request, response: Response) => {
 }
 
 export const taksCompleted = async (request: Request, response: Response) => {
+  // eslint-disable-next-line
+
   const { id } = request.params
   const tasks = await knex('tasks').update({
     completed: true

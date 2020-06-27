@@ -83,7 +83,7 @@ exports.login = function (request, response) { return __awaiter(void 0, void 0, 
                 return [4, bcrypt_1.default.compare(password, user[0].password)];
             case 2:
                 if (_b.sent()) {
-                    return [2, response.json({ user: user })];
+                    return [2, response.json(user[0].id)];
                 }
                 _b.label = 3;
             case 3: return [2, response.status(401).send()];
